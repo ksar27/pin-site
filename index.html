@@ -1,0 +1,753 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#F3F4F1" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0C0C0C" media="(prefers-color-scheme: dark)">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+</head>
+<body>
+<title>pin.</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="pin. is snagging for small architecture practices. Pin defects on the drawing, issue them to contractors and print an A4 report you'd put your name to.">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAwIDEwMDAiPjxyZWN0IHdpZHRoPSIxMDAwIiBoZWlnaHQ9IjEwMDAiIGZpbGw9IiMwQzBDMEMiLz48ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtNjAgLTYwKSBzY2FsZSgxLjEyKSI+PHBhdGggZmlsbD0iI2ZmZiIgZD0iTTI2Ny4xIDY1OC44SDMyMS4yVjU2OC4zSDMyMS45QzMzMC41IDU4Ni44IDM0Ni45IDU5Ni43IDM2OC44IDU5Ni43QzQxMi4zIDU5Ni43IDQ0MC41IDU2Mi4yIDQ0MC41IDUwOS43QzQ0MC41IDQ1OC44IDQxMS4yIDQyMy4zIDM2OS4yIDQyMy4zQzM0Ny43IDQyMy4zIDMzMS4zIDQzMS44IDMyMS40IDQ0OC42SDMyMC42VjQyNi45SDI2Ny4xWk0zNTMuNSA1NTMuNEMzMzMuMCA1NTMuNCAzMTkuMCA1MzYuMiAzMTkuMCA1MDkuN0MzMTkuMCA0ODMuNCAzMzMuMCA0NjYuNCAzNTMuNSA0NjYuNEMzNzMuNSA0NjYuNCAzODUuNyA0ODIuNiAzODUuNyA1MDkuN0MzODUuNyA1MzcuMCAzNzMuNSA1NTMuNCAzNTMuNSA1NTMuNFogTTQ1Mi43IDU5My4xSDUwNi44VjQyNi45SDQ1Mi43Wk00NzkuNiA0MTAuN0M0OTcuMCA0MTAuNyA1MDkuNSAzOTkuMiA1MDkuNSAzODMuM0M1MDkuNSAzNjcuNCA0OTcuMCAzNTYuMSA0NzkuNiAzNTYuMUM0NjIuMyAzNTYuMSA0NDkuOCAzNjcuNCA0NDkuOCAzODMuM0M0NDkuOCAzOTkuMiA0NjIuMyA0MTAuNyA0NzkuNiA0MTAuN1ogTTU3OS45IDUwMi43QzU3OS45IDQ4MC4xIDU5MC45IDQ2OS41IDYwOC4wIDQ2OS41QzYyNS4yIDQ2OS41IDYzNS4xIDQ4MC4yIDYzNS4xIDQ5OS45VjU5My4xSDY4OS4yVjQ4OC42QzY4OS4yIDQ0Ny43IDY2OC4xIDQyMy4zIDYzMi4xIDQyMy4zQzYwNy4xIDQyMy4zIDU5MC4yIDQzNC44IDU3OS4yIDQ1My44VjQyNi45SDUyNS43VjU5My4xSDU3OS45WiIvPjxjaXJjbGUgY3g9IjczOC4yIiBjeT0iNTU5LjIiIHI9IjMzLjgiIGZpbGw9IiNGRjU0MzMiLz48L2c+PC9zdmc+">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,500..800&family=IBM+Plex+Mono:wght@500&family=Instrument+Sans:wght@400..600&display=swap">
+<style>
+/* Layout: a drawing sheet. Hairline-ruled bands on drawing-paper grey; title blocks carry facts; one orange pin per view. */
+:root{
+  --ink:#0C0C0C; --graphite:#5B605C; --paper:#F3F4F1; --sheet:#FFFFFF; --trace:#E7E9E4; --rule:#D3D6D0;
+  --signal:#FF5433; --on-signal:#0C0C0C; --action:#0C0C0C; --on-action:#FFFFFF; --focus:#0C0C0C;
+  --open:#B5331F; --notified:#8F5A00; --fixed:#4B47C4; --closed:#1F7A45; --on-status:#FFFFFF;
+  --badge-disc:#0C0C0C; --badge-ring:#F3F4F1;
+  --shadow-sheet:0 1px 0 #D3D6D0, 0 18px 40px -24px rgba(12,12,12,.35);
+  --display:"Archivo","Helvetica Neue",Arial,sans-serif;
+  --body:"Instrument Sans","Helvetica Neue",Arial,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+  --gutter:max(16px, env(safe-area-inset-left, 0px));
+  --gutter-r:max(16px, env(safe-area-inset-right, 0px));
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --ink:#EDEEE9; --graphite:#9EA39D; --paper:#0C0C0C; --sheet:#161816; --trace:#1F221F; --rule:#2E312D;
+  --signal:#FF6A4A; --action:#EDEEE9; --on-action:#0C0C0C; --focus:#FF6A4A;
+  --open:#FF8A70; --notified:#F0B341; --fixed:#A6A3FF; --closed:#5FCB8B; --on-status:#0C0C0C;
+  --badge-disc:#0C0C0C; --badge-ring:#3A3D39; --shadow-sheet:0 1px 0 #2E312D, 0 18px 40px -24px rgba(0,0,0,.8); color-scheme:dark}}
+:root[data-theme="dark"]{
+  --ink:#EDEEE9; --graphite:#9EA39D; --paper:#0C0C0C; --sheet:#161816; --trace:#1F221F; --rule:#2E312D;
+  --signal:#FF6A4A; --action:#EDEEE9; --on-action:#0C0C0C; --focus:#FF6A4A;
+  --open:#FF8A70; --notified:#F0B341; --fixed:#A6A3FF; --closed:#5FCB8B; --on-status:#0C0C0C;
+  --badge-disc:#0C0C0C; --badge-ring:#3A3D39; --shadow-sheet:0 1px 0 #2E312D, 0 18px 40px -24px rgba(0,0,0,.8); color-scheme:dark}
+
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:84px}
+body{background:var(--paper);color:var(--ink);font:400 16px/1.6 var(--body);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--focus);outline-offset:2px;border-radius:4px}
+.wrap{max-width:1180px;margin:0 auto;padding-left:var(--gutter);padding-right:var(--gutter-r)}
+.narrow{max-width:760px}
+h1,h2,h3{font-family:var(--display);font-stretch:112%;font-weight:800;letter-spacing:-.025em;margin:0;text-wrap:balance}
+p{margin:0}
+.label{font:500 11px/1.4 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--graphite)}
+.ref{font:500 13px/1.4 var(--mono);font-variant-numeric:tabular-nums}
+.lede{font-size:clamp(18px,2vw,21px);line-height:1.5;color:var(--graphite);max-width:34em}
+.muted{color:var(--graphite)}
+.dot{display:inline-block;width:.32em;height:.32em;border-radius:50%;background:var(--signal);vertical-align:.08em;margin-left:.04em}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:46px;padding:0 22px;border-radius:999px;border:1px solid transparent;font:600 15px/1 var(--body);text-decoration:none;cursor:pointer;transition:transform .15s ease-out,border-color .15s ease-out,background-color .15s ease-out}
+.btn-primary{background:var(--action);color:var(--on-action)}
+.btn-primary:hover{transform:translateY(-1px)}
+.btn-secondary{background:transparent;color:var(--ink);border-color:var(--rule)}
+.btn-secondary:hover{border-color:var(--ink)}
+.btn-sm{min-height:38px;padding:0 16px;font-size:14px}
+
+/* header */
+.site-head{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:color-mix(in srgb,var(--paper) 88%,transparent);backdrop-filter:saturate(1.4) blur(14px);-webkit-backdrop-filter:saturate(1.4) blur(14px);border-bottom:1px solid var(--rule)}
+.site-head .wrap{display:flex;align-items:center;gap:24px;height:64px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none}
+.brand svg{width:34px;height:34px;display:block;border-radius:50%;box-shadow:0 0 0 1px var(--badge-ring)}
+.brand b{font:800 20px/1 var(--display);font-stretch:112%;letter-spacing:-.03em}
+.nav{display:flex;gap:4px;margin-left:auto;align-items:center}
+.nav a{padding:8px 12px;border-radius:999px;text-decoration:none;font-weight:500;font-size:15px;color:var(--graphite)}
+.nav a:hover,.nav a[aria-current="page"]{color:var(--ink);background:var(--trace)}
+.nav .btn{margin-left:8px}
+@media (max-width:820px){.nav a.hide-sm{display:none}}
+@media (max-width:480px){.nav a{padding:8px 8px}.nav .btn{display:none}}
+
+/* hero */
+.hero{padding-block:clamp(48px,8vw,104px) clamp(48px,7vw,88px)}
+.hero .wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:clamp(32px,5vw,72px);align-items:center}
+.hero h1{font-size:clamp(44px,6.4vw,84px);line-height:.95}
+.hero .label{margin-bottom:22px;display:flex;align-items:center;gap:10px}
+.hero .label::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--ink)}
+.hero .lede{margin-top:24px}
+.cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:32px}
+.fine{margin-top:18px;font-size:14px;color:var(--graphite)}
+@media (max-width:900px){.hero .wrap{grid-template-columns:1fr}}
+
+/* drawing sheet */
+.sheet{background:var(--sheet);border:1px solid var(--rule);border-radius:2px;box-shadow:var(--shadow-sheet)}
+.drawing{position:relative;padding:18px}
+.drawing-field{position:relative;aspect-ratio:4/3;max-width:100%;background-color:var(--sheet);background-image:linear-gradient(var(--trace) 1px,transparent 1px),linear-gradient(90deg,var(--trace) 1px,transparent 1px),linear-gradient(var(--rule) 1px,transparent 1px),linear-gradient(90deg,var(--rule) 1px,transparent 1px);background-size:12px 12px,12px 12px,96px 96px,96px 96px;border:1px solid var(--rule)}
+.drawing-field svg.plan{position:absolute;inset:6%;width:88%;height:88%}
+.plan .wall{fill:none;stroke:var(--ink);stroke-width:5;stroke-linejoin:miter}
+.plan .thin{fill:none;stroke:var(--ink);stroke-width:1.3}
+.plan .swing{fill:none;stroke:var(--graphite);stroke-width:1;stroke-dasharray:3 3}
+.plan .room{font:500 9px var(--mono);letter-spacing:.08em;fill:var(--graphite);text-transform:uppercase}
+.pinm{position:absolute;width:28px;height:28px;margin:-28px 0 0 0;border-radius:50% 50% 50% 0;transform:rotate(-45deg);background:var(--signal);box-shadow:0 0 0 2px var(--sheet);display:grid;place-items:center;animation:drop .5s cubic-bezier(.2,.8,.2,1.2) both}
+.pinm span{transform:rotate(45deg);font:600 10px/1 var(--mono);color:var(--on-signal)}
+.pinm.closed{background:var(--closed)}.pinm.closed span{color:var(--on-status)}
+.pinm:nth-of-type(2){animation-delay:.12s}.pinm:nth-of-type(3){animation-delay:.24s}.pinm:nth-of-type(4){animation-delay:.36s}.pinm:nth-of-type(5){animation-delay:.48s}
+@keyframes drop{from{transform:translateY(-14px) rotate(-45deg);opacity:.0001}to{transform:rotate(-45deg);opacity:1}}
+@media (prefers-reduced-motion:reduce){.pinm{animation:none}.btn{transition:none}html{scroll-behavior:auto}}
+.tb{display:grid;grid-template-columns:repeat(var(--cols,4),minmax(0,1fr));border:1px solid var(--ink);border-radius:2px;background:var(--sheet)}
+.tb{overflow:hidden}
+.tb>div{padding:8px 12px;border-right:1px solid var(--rule);border-bottom:1px solid var(--rule);margin:0 -1px -1px 0;min-width:0}
+.tb b{display:block;font:500 10px/1.4 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--graphite)}
+.tb span{font:500 14px/1.4 var(--body);overflow-wrap:break-word;hyphens:auto}
+.drawing .tb{margin-top:14px}
+@media (max-width:560px){.drawing .tb{--cols:2}}
+.snagcard{position:absolute;right:-12px;bottom:84px;width:min(300px,62%);background:var(--sheet);border:1px solid var(--rule);border-radius:12px;padding:16px;display:grid;gap:8px;box-shadow:var(--shadow-sheet)}
+@media (max-width:560px){.snagcard{position:static;width:auto;margin-top:14px}}
+.snagcard .top{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.snagcard h3{font-size:16px;line-height:1.25;letter-spacing:-.01em}
+.snagcard p{font-size:13px;color:var(--graphite);line-height:1.45}
+.dates{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-top:1px solid var(--rule);padding-top:8px}
+.dates b{display:block;font:500 9px/1.3 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--graphite)}
+.dates span{font:500 12px/1.3 var(--mono);font-variant-numeric:tabular-nums}
+.tag{display:inline-flex;align-items:center;gap:6px;height:22px;padding:0 9px;border-radius:999px;font:600 11.5px/1 var(--body);color:var(--on-status);white-space:nowrap}
+.tag::before{content:"";width:5px;height:5px;border-radius:50%;background:currentColor;opacity:.85}
+.t-open{background:var(--open)}.t-notified{background:var(--notified)}.t-fixed{background:var(--fixed)}.t-closed{background:var(--closed)}
+
+/* bands */
+.band{padding-block:clamp(56px,8vw,96px);border-top:1px solid var(--rule)}
+.band-head{display:grid;gap:16px;margin-bottom:clamp(32px,5vw,56px);max-width:760px}
+.band-head h2{font-size:clamp(32px,4.4vw,52px);line-height:1}
+.facts{border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);background:var(--sheet)}
+.facts .wrap{display:grid;grid-template-columns:repeat(4,minmax(0,1fr))}
+.facts .wrap>div{padding:22px 20px 24px;border-left:1px solid var(--rule);display:grid;gap:6px}
+.facts .wrap>div:first-child{border-left:0;padding-left:0}
+.facts strong{font:700 17px/1.3 var(--display);font-stretch:112%;letter-spacing:-.01em}
+.facts p{font-size:14px;color:var(--graphite)}
+@media (max-width:820px){.facts .wrap{grid-template-columns:repeat(2,minmax(0,1fr))}.facts .wrap>div:nth-child(3){border-left:0;padding-left:0}.facts .wrap>div:nth-child(n+3){border-top:1px solid var(--rule)}}
+@media (max-width:440px){.facts .wrap{grid-template-columns:1fr}.facts .wrap>div{border-left:0;padding-left:0}.facts .wrap>div+div{border-top:1px solid var(--rule)}}
+
+/* steps */
+.steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;border:1px solid var(--rule);background:var(--sheet);border-radius:2px;counter-reset:step}
+.step{padding:28px 24px 30px;border-left:1px solid var(--rule);display:grid;gap:12px;align-content:start;min-width:0}
+.step:first-child{border-left:0}
+.step .num{font:500 12px/1 var(--mono);color:var(--graphite);display:flex;justify-content:space-between;align-items:center}
+.step h3{font-size:24px;line-height:1.1}
+.step p{color:var(--graphite);font-size:15px}
+.step .date{font:500 12px/1.4 var(--mono);border-top:1px solid var(--rule);padding-top:12px;color:var(--graphite)}
+@media (max-width:900px){.steps{grid-template-columns:repeat(2,minmax(0,1fr))}.step:nth-child(3){border-left:0}.step:nth-child(n+3){border-top:1px solid var(--rule)}}
+@media (max-width:520px){.steps{grid-template-columns:1fr}.step{border-left:0}.step+.step{border-top:1px solid var(--rule)}}
+
+/* features */
+.features{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(28px,4vw,48px) clamp(24px,3vw,40px)}
+.feature{display:grid;gap:10px;align-content:start;padding-top:18px;border-top:1px solid var(--ink)}
+.feature .label{color:var(--ink)}
+.feature h3{font-size:21px;line-height:1.2;letter-spacing:-.012em}
+.feature p{color:var(--graphite);font-size:15.5px}
+@media (max-width:900px){.features{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:560px){.features{grid-template-columns:1fr}}
+
+/* use cases */
+.cases{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+.case{background:var(--sheet);border:1px solid var(--rule);border-radius:12px;padding:clamp(22px,3vw,32px);display:grid;gap:14px;align-content:start}
+.case .label{display:flex;justify-content:space-between}
+.case h3{font-size:clamp(22px,2.4vw,28px);line-height:1.08}
+.case p{color:var(--graphite)}
+.case ul{margin:0;padding:0;list-style:none;display:grid;gap:8px;border-top:1px solid var(--rule);padding-top:14px}
+.case li{display:grid;grid-template-columns:14px 1fr;gap:10px;font-size:15px}
+.case li::before{content:"";width:6px;height:6px;margin-top:9px;border-radius:50%;background:var(--ink)}
+@media (max-width:760px){.cases{grid-template-columns:1fr}}
+
+/* report */
+.report{display:grid;grid-template-columns:minmax(0,.95fr) minmax(0,1.05fr);gap:clamp(32px,5vw,72px);align-items:center}
+.report ul{margin:24px 0 0;padding:0;list-style:none;display:grid;gap:14px}
+.report li{display:grid;grid-template-columns:22px 1fr;gap:12px}
+.report li b{font-weight:600}
+.report li .k{font:500 12px/1.6 var(--mono);color:var(--graphite)}
+.a4{aspect-ratio:210/297;max-width:100%;padding:7% 7.5%;display:flex;flex-direction:column;gap:5%;font-size:clamp(8px,1.05vw,11.5px);line-height:1.45;position:relative}
+.a4 .rp-head{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--ink);padding-bottom:3%;font:500 .85em var(--mono);color:var(--graphite)}
+.a4 .rp-head svg{height:2.6em;width:2.6em}
+.a4 h4{font:800 2.4em/1 var(--display);font-stretch:112%;letter-spacing:-.02em;margin:0}
+.a4 .tb{--cols:3}.a4 .tb b{font-size:.75em}.a4 .tb span{font-size:.95em}
+.a4 .rec{display:grid;grid-template-columns:3.6em 1fr;gap:3%;border-top:1px solid var(--rule);padding-top:3%}
+.a4 .rec .r{font:600 1.05em var(--mono)}
+.a4 .rec h5{font:700 1.15em/1.25 var(--display);font-stretch:112%;margin:0 0 .4em}
+.a4 .imgs{display:grid;grid-template-columns:repeat(3,1fr);gap:4px;margin-top:.6em}
+.a4 .imgs i{aspect-ratio:1;background:var(--trace);border:1px solid var(--rule);display:block}
+.a4 .imgs i:first-child{background-image:linear-gradient(var(--rule) 1px,transparent 1px),linear-gradient(90deg,var(--rule) 1px,transparent 1px);background-size:8px 8px;position:relative}
+.a4 .imgs i:first-child::after{content:"";position:absolute;left:46%;top:38%;width:10px;height:10px;border-radius:50% 50% 50% 0;transform:rotate(-45deg);background:var(--signal)}
+.a4 .foot{margin-top:auto;display:flex;justify-content:space-between;font:500 .8em var(--mono);color:var(--graphite);border-top:1px solid var(--rule);padding-top:2.5%}
+@media (max-width:900px){.report{grid-template-columns:1fr}}
+
+/* pricing */
+.plans{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;align-items:stretch}
+.plan-card{background:var(--sheet);border:1px solid var(--rule);border-radius:2px;display:flex;flex-direction:column}
+.plan-card.featured{border-color:var(--ink);box-shadow:var(--shadow-sheet)}
+.plan-top{padding:26px 24px 22px;display:grid;gap:10px;border-bottom:1px solid var(--rule)}
+.plan-top h3{font-size:28px;display:flex;align-items:center;justify-content:space-between;gap:8px}
+.plan-top h3 small{font:500 11px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;padding:6px 9px;border-radius:999px;background:var(--signal);color:var(--on-signal)}
+.price{display:flex;align-items:baseline;gap:6px}
+.price strong{font:800 44px/1 var(--display);font-stretch:112%;letter-spacing:-.03em;font-variant-numeric:tabular-nums}
+.price span{color:var(--graphite);font-size:14px}
+.plan-card .tb{--cols:2;border:0;border-bottom:1px solid var(--rule);border-radius:0}
+.plan-card .tb>div:nth-child(2n){border-right:0}
+.plan-card ul{list-style:none;margin:0;padding:20px 24px;display:grid;gap:10px;flex:1}
+.plan-card li{display:grid;grid-template-columns:18px 1fr;gap:8px;font-size:15px}
+.plan-card li::before{content:"";width:10px;height:6px;border-left:2px solid var(--ink);border-bottom:2px solid var(--ink);transform:rotate(-45deg);margin-top:6px}
+.plan-card .btn{margin:0 24px 24px}
+.note{margin-top:22px;font-size:14px;color:var(--graphite);max-width:60em}
+@media (max-width:900px){.plans{grid-template-columns:1fr;max-width:520px}}
+
+/* help teaser & help centre */
+.help-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;border:1px solid var(--rule);background:var(--sheet)}
+.help-cat{padding:22px 22px 24px;border-left:1px solid var(--rule);border-top:1px solid var(--rule);display:grid;gap:12px;align-content:start;min-width:0}
+.help-cat:nth-child(3n+1){border-left:0}
+.help-cat:nth-child(-n+3){border-top:0}
+.help-cat h3{font-size:18px;letter-spacing:-.01em}
+.help-cat ul{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+.help-cat a{text-decoration:none;font-size:15px;display:inline-block}
+.help-cat a:hover{text-decoration:underline;text-underline-offset:3px}
+@media (max-width:900px){.help-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.help-cat{border-left:1px solid var(--rule)!important;border-top:1px solid var(--rule)!important}.help-cat:nth-child(2n+1){border-left:0!important}.help-cat:nth-child(-n+2){border-top:0!important}}
+@media (max-width:560px){.help-grid{grid-template-columns:1fr}.help-cat{border-left:0!important;border-top:1px solid var(--rule)!important}.help-cat:first-child{border-top:0!important}}
+.search{display:flex;align-items:center;gap:10px;background:var(--sheet);border:1px solid var(--rule);border-radius:999px;padding:0 18px;min-height:52px;max-width:560px}
+.search:focus-within{border-color:var(--ink)}
+.search svg{flex:none;width:18px;height:18px;stroke:var(--graphite);fill:none;stroke-width:1.8}
+.search input{border:0;background:transparent;font:inherit;font-size:16px;color:var(--ink);flex:1;min-width:0;outline:none;height:50px}
+.results{margin-top:14px;max-width:560px;display:grid;gap:2px}
+.results a{display:block;padding:10px 14px;border-radius:10px;text-decoration:none;background:var(--sheet);border:1px solid var(--rule)}
+.results a small{display:block;color:var(--graphite)}
+
+.helpc{display:grid;grid-template-columns:240px minmax(0,1fr);gap:clamp(28px,5vw,64px);padding-block:clamp(40px,6vw,72px)}
+.helpc aside{position:sticky;top:96px;align-self:start;display:grid;gap:22px}
+.helpc aside h4{margin:0 0 6px}
+.helpc aside ul{list-style:none;margin:0;padding:0;display:grid;gap:2px}
+.helpc aside a{display:block;padding:5px 10px;margin-left:-10px;border-radius:8px;text-decoration:none;font-size:14.5px;color:var(--graphite)}
+.helpc aside a:hover{color:var(--ink);background:var(--trace)}
+.helpc aside a[aria-current="page"]{color:var(--ink);background:var(--trace);font-weight:600}
+@media (max-width:860px){.helpc{grid-template-columns:1fr}.helpc aside{position:static;order:2;border-top:1px solid var(--rule);padding-top:28px}}
+.crumbs{display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-size:14px;color:var(--graphite);margin-bottom:18px}
+.crumbs a{text-decoration:none}.crumbs a:hover{text-decoration:underline}
+.article{background:var(--sheet);border:1px solid var(--rule);border-radius:2px;padding:clamp(24px,4vw,48px);box-shadow:var(--shadow-sheet);max-width:760px}
+.article h1{font-size:clamp(30px,3.6vw,42px);line-height:1.05}
+.article .meta{display:flex;flex-wrap:wrap;gap:8px 18px;margin:14px 0 26px;padding-bottom:18px;border-bottom:1px solid var(--rule)}
+.article .summary{font-size:18px;line-height:1.55;margin-bottom:22px}
+.article h2{font-size:21px;letter-spacing:-.012em;margin:30px 0 10px}
+.article p,.article li{max-width:65ch}
+.article p+p{margin-top:12px}
+.article ol,.article ul{padding-left:1.3em;margin:10px 0;display:grid;gap:8px}
+.article ol li::marker{font:600 14px var(--mono);color:var(--graphite)}
+.article .callout{margin:20px 0;padding:14px 16px;border:1px solid var(--rule);border-left:0;border-right:0;background:var(--paper);font-size:15px}
+.article .callout b{font:500 11px/1.4 var(--mono);letter-spacing:.08em;text-transform:uppercase;display:block;color:var(--graphite);margin-bottom:4px}
+.article kbd,.article .ui{font:600 .92em var(--body);background:var(--trace);border:1px solid var(--rule);border-radius:6px;padding:1px 6px;white-space:nowrap}
+.related{margin-top:30px;padding-top:20px;border-top:1px solid var(--rule);display:grid;gap:8px}
+.related a{font-weight:500}
+.cat-list{display:grid;gap:36px}
+.cat-list section h2{font-size:24px;margin-bottom:12px}
+.cat-list ul{list-style:none;margin:0;padding:0;border-top:1px solid var(--rule)}
+.cat-list li a{display:grid;grid-template-columns:1fr auto;gap:12px;padding:14px 4px;border-bottom:1px solid var(--rule);text-decoration:none}
+.cat-list li a:hover{background:var(--sheet)}
+.cat-list li a span{color:var(--graphite);font-size:14.5px;display:block;margin-top:2px}
+.cat-list li a i{font-style:normal;font:500 12px var(--mono);color:var(--graphite);align-self:center}
+
+/* early access */
+.ea{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(32px,5vw,72px);align-items:start}
+.form{display:grid;gap:14px;padding:clamp(22px,3vw,32px)}
+.form .row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media (max-width:560px){.form .row{grid-template-columns:1fr}}
+.field{display:grid;gap:6px}
+.field label{font:500 11px/1.4 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--graphite)}
+.field input,.field select,.field textarea{font:inherit;font-size:16px;color:var(--ink);background:var(--paper);border:1px solid var(--rule);border-radius:2px;padding:12px 12px;min-height:46px;width:100%}
+.field textarea{min-height:88px;resize:vertical}
+.field input:focus,.field select:focus,.field textarea:focus{outline:2px solid var(--focus);outline-offset:1px;border-color:var(--ink)}
+.form .btn{justify-self:start;margin-top:4px}
+.form-msg{font-size:15px;padding:12px 14px;border:1px solid var(--rule);background:var(--paper)}
+.form-msg.ok{border-color:var(--closed)}
+.form-msg.err{border-color:var(--open)}
+@media (max-width:860px){.ea{grid-template-columns:1fr}}
+
+/* footer */
+.site-foot{border-top:1px solid var(--rule);padding-block:40px 56px}
+.site-foot .tb{--cols:4}
+.site-foot .tb>div:nth-child(4n){border-right:0}
+.site-foot .bottom{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;margin-top:20px;font-size:14px;color:var(--graphite)}
+.site-foot .bottom a{color:var(--graphite)}
+@media (max-width:700px){.site-foot .tb{--cols:2}.site-foot .tb>div:nth-child(2n){border-right:0}}
+[data-view]{display:none}
+[data-view].on{display:block}
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="badge" viewBox="0 0 1000 1000"><circle cx="500" cy="500" r="500" fill="#0C0C0C"/><path fill="#fff" d="M267.1 658.8H321.2V568.3H321.9C330.5 586.8 346.9 596.7 368.8 596.7C412.3 596.7 440.5 562.2 440.5 509.7C440.5 458.8 411.2 423.3 369.2 423.3C347.7 423.3 331.3 431.8 321.4 448.6H320.6V426.9H267.1ZM353.5 553.4C333.0 553.4 319.0 536.2 319.0 509.7C319.0 483.4 333.0 466.4 353.5 466.4C373.5 466.4 385.7 482.6 385.7 509.7C385.7 537.0 373.5 553.4 353.5 553.4Z M452.7 593.1H506.8V426.9H452.7ZM479.6 410.7C497.0 410.7 509.5 399.2 509.5 383.3C509.5 367.4 497.0 356.1 479.6 356.1C462.3 356.1 449.8 367.4 449.8 383.3C449.8 399.2 462.3 410.7 479.6 410.7Z M579.9 502.7C579.9 480.1 590.9 469.5 608.0 469.5C625.2 469.5 635.1 480.2 635.1 499.9V593.1H689.2V488.6C689.2 447.7 668.1 423.3 632.1 423.3C607.1 423.3 590.2 434.8 579.2 453.8V426.9H525.7V593.1H579.9Z"/><circle cx="738.2" cy="559.2" r="33.8" fill="#FF5433"/></symbol>
+</svg>
+
+<header class="site-head">
+  <div class="wrap">
+    <a class="brand" href="#top" data-go="home" aria-label="pin. home"><svg><use href="#badge"/></svg></a>
+    <nav class="nav" aria-label="Main">
+      <a class="hide-sm" href="#how" data-go="home">How it works</a>
+      <a class="hide-sm" href="#uses" data-go="home">Use cases</a>
+      <a href="#pricing" data-go="home">Pricing</a>
+      <a href="#help" data-go="help">Help</a>
+      <a class="btn btn-primary btn-sm" href="#early" data-go="home">Request early access</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+<!-- ================= HOME ================= -->
+<div data-view="home" class="on">
+
+<section class="hero">
+  <div class="wrap">
+    <div>
+      <p class="label">Snagging for small architecture practices</p>
+      <h1>Every snag, pinned to the drawing<span class="dot" aria-hidden="true"></span></h1>
+      <p class="lede">Walk the building, drop a pin where the defect is and photograph it. pin. issues it to the contractor, records every reply and date, and prints an A4 report you'd put your practice's name to.</p>
+      <div class="cta">
+        <a class="btn btn-primary" href="#early">Request early access</a>
+        <a class="btn btn-secondary" href="#how">See how it works</a>
+      </div>
+      <p class="fine">iPhone, iPad and any web browser. Works offline on site.</p>
+    </div>
+
+    <figure class="sheet drawing" style="margin:0" aria-label="A ground floor plan with five snags pinned on it">
+      <div class="drawing-field">
+        <svg class="plan" viewBox="0 0 400 300" aria-hidden="true">
+          <path class="wall" d="M10 10 H390 V290 H10 Z"/>
+          <path class="wall" d="M170 10 V120 M170 160 V290 M10 170 H120 M150 170 H170 M170 200 H260 M290 200 H390 M260 10 V80 M260 110 V200"/>
+          <path class="thin" d="M60 10 h70 M300 10 h60 M390 40 v60 M390 230 v40 M10 60 v70 M40 290 h80"/>
+          <path class="swing" d="M120 170 A30 30 0 0 1 150 140 M170 120 A40 40 0 0 1 210 160 M260 200 A30 30 0 0 0 290 170 M260 80 A30 30 0 0 1 290 110"/>
+          <text class="room" x="40" y="100">Living</text>
+          <text class="room" x="40" y="240">Kitchen</text>
+          <text class="room" x="190" y="60">Bed 1</text>
+          <text class="room" x="290" y="60">Bath</text>
+          <text class="room" x="300" y="250">Bed 2</text>
+          <text class="room" x="190" y="250">Hall</text>
+        </svg>
+        <span class="pinm" style="left:22%;top:36%"><span>11</span></span>
+        <span class="pinm" style="left:58%;top:22%"><span>12</span></span>
+        <span class="pinm closed" style="left:84%;top:40%"><span>9</span></span>
+        <span class="pinm" style="left:78%;top:79%"><span>14</span></span>
+        <span class="pinm" style="left:26%;top:74%"><span>13</span></span>
+      </div>
+      <div class="tb" style="--cols:4">
+        <div style="grid-column:span 2"><b>Project</b><span>14 Albion Road</span></div>
+        <div><b>Drawing</b><span class="ref">GA-101 Rev C</span></div>
+        <div><b>Stage</b><span>Practical completion</span></div>
+      </div>
+      <div class="snagcard" aria-label="Example snag 14">
+        <div class="top"><span class="ref muted">#014 · Bed 2</span><span class="tag t-notified">Notified</span></div>
+        <h3>Door binds on head; ease and adjust hinges</h3>
+        <p>Doors &amp; ironmongery · Harlow Joinery · Due 28 Oct</p>
+        <div class="dates"><div><b>Opened</b><span>14 Oct</span></div><div><b>Notified</b><span>15 Oct</span></div><div><b>Fixed</b><span>–</span></div><div><b>Closed</b><span>–</span></div></div>
+      </div>
+    </figure>
+  </div>
+</section>
+
+<section class="facts" aria-label="At a glance">
+  <div class="wrap">
+    <div><span class="label">On site</span><strong>Works without signal</strong><p>Everything saves on the iPhone and syncs when you're back online.</p></div>
+    <div><span class="label">Contractors</span><strong>No app to install</strong><p>They open a link, see only their snags, reply and mark them fixed.</p></div>
+    <div><span class="label">Reports</span><strong>A4, ready to issue</strong><p>Cover, drawings, photos and the full trail, laid out for print.</p></div>
+    <div><span class="label">Record</span><strong>Every date kept</strong><p>Opened, notified, fixed and closed, with each reply in between.</p></div>
+  </div>
+</section>
+
+<section class="band" id="how">
+  <div class="wrap">
+    <div class="band-head">
+      <p class="label">How it works</p>
+      <h2>Pin it. Issue it. Close it.</h2>
+      <p class="lede">Every snag moves through the same four steps, and pin. writes the date of each one into the record.</p>
+    </div>
+    <ol class="steps" style="list-style:none;margin:0;padding:0">
+      <li class="step">
+        <div class="num"><span>01</span><span class="tag t-open">Open</span></div>
+        <h3>Pin it on the drawing</h3>
+        <p>Tap the spot on the GA plan. Add photos, mark them up and dictate what's wrong. Choose the trade and who should fix it.</p>
+        <div class="date">Opened 14 Oct, 10:42</div>
+      </li>
+      <li class="step">
+        <div class="num"><span>02</span><span class="tag t-notified">Notified</span></div>
+        <h3>Issue it to the contractor</h3>
+        <p>Issue a party's snags in one go. pin. marks them notified, prepares the A4 notice and copies a covering message with their link.</p>
+        <div class="date">Notified 15 Oct, 09:10</div>
+      </li>
+      <li class="step">
+        <div class="num"><span>03</span><span class="tag t-fixed">Fixed</span></div>
+        <h3>They put it right</h3>
+        <p>The contractor opens the link on their phone, replies, adds photos of the finished work and marks it fixed. No app, no account to set up themselves.</p>
+        <div class="date">Fixed 22 Oct, 16:05</div>
+      </li>
+      <li class="step">
+        <div class="num"><span>04</span><span class="tag t-closed">Closed</span></div>
+        <h3>You inspect and close</h3>
+        <p>Check the photos or look on site, then close it. If it isn't right, reopen it with a note and it goes back to them.</p>
+        <div class="date">Closed 24 Oct, 11:30</div>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<section class="band" id="features">
+  <div class="wrap">
+    <div class="band-head">
+      <p class="label">What's in it</p>
+      <h2>Made for the walk-round, not the office.</h2>
+    </div>
+    <div class="features">
+      <div class="feature"><span class="label">Drawings</span><h3>Pins on your own plans</h3><p>Upload GA plans as PDF or image; each PDF page becomes a drawing. Zoom in, drop a pin, and every snag remembers where it is.</p></div>
+      <div class="feature"><span class="label">Photos</span><h3>Mark up what you see</h3><p>Take photos in the app and draw on them: arrows, boxes, labels and freehand in five colours, so nobody argues about which crack.</p></div>
+      <div class="feature"><span class="label">Voice</span><h3>Speak, don't type</h3><p>Dictate descriptions and notes with gloves on. On iPhone the speech is converted on the device, so it works without signal.</p></div>
+      <div class="feature"><span class="label">AI assist</span><h3>Wording and a remedy</h3><p>Turn "door sticks" into a clear defect description, and draft a remedial method for the contractor. You check it before it goes.</p></div>
+      <div class="feature"><span class="label">Trail</span><h3>One record per snag</h3><p>Status changes, notes, notices issued and contractor replies, each time-stamped with who said what. The audit trail writes itself.</p></div>
+      <div class="feature"><span class="label">Team</span><h3>Your practice, your access</h3><p>Colleagues see every project. Contractors see only what's issued to them. Everyone signs in with their own email.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="uses">
+  <div class="wrap">
+    <div class="band-head">
+      <p class="label">Use cases</p>
+      <h2>Where practices use pin.</h2>
+      <p class="lede">From a two-person studio's kitchen extension to a terrace of new-build houses, the job is the same: find it, record it, get it fixed, prove it.</p>
+    </div>
+    <div class="cases">
+      <article class="case">
+        <span class="label"><span>Practical completion</span><span class="ref">Stage 6</span></span>
+        <h3>The pre-completion inspection</h3>
+        <p>Walk the building room by room with the drawings in your hand, and leave with a list the contractor can't misread.</p>
+        <ul><li>Pin each defect on the GA plan as you go</li><li>Issue the whole list the same afternoon</li><li>Track what's outstanding before you certify</li></ul>
+      </article>
+      <article class="case">
+        <span class="label"><span>Rectification period</span><span class="ref">12 months</span></span>
+        <h3>The end-of-defects inspection</h3>
+        <p>Reopen the project a year on, log what the client has reported and what you find, and keep the full history from completion.</p>
+        <ul><li>Add new snags alongside last year's closed ones</li><li>Show closed items on the drawing for comparison</li><li>Print the schedule for the making good certificate</li></ul>
+      </article>
+      <article class="case">
+        <span class="label"><span>Client handover</span><span class="ref">Walk-round</span></span>
+        <h3>Walking the client round</h3>
+        <p>Capture the client's comments in their words as you walk, then tidy them into proper defect descriptions back at the office.</p>
+        <ul><li>Dictate notes as the client talks</li><li>Refine the wording with AI later</li><li>Share a clean report the client can follow</li></ul>
+      </article>
+      <article class="case">
+        <span class="label"><span>Small works</span><span class="ref">Refurb · fit-out</span></span>
+        <h3>Small works and fit-outs</h3>
+        <p>On a short programme with one main contractor, pin. replaces the spreadsheet, the photo folder and the email chain in one go.</p>
+        <ul><li>One project, one drawing, done in minutes</li><li>The contractor replies from their phone</li><li>Export to CSV for the cost consultant</li></ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="reports">
+  <div class="wrap report">
+    <div>
+      <p class="label">Reports</p>
+      <h2 style="font-size:clamp(32px,4.4vw,52px);line-height:1;margin-top:16px">A report you'd put your name to.</h2>
+      <p class="lede" style="margin-top:18px">Choose which snags, which party and which trade. pin. lays them out on A4 with your practice's name on the cover. Print it or save it as a PDF.</p>
+      <ul>
+        <li><span class="k">01</span><span><b>Cover and summary.</b> Job number, client, site, date of issue and a count of open, notified, fixed and closed items by party.</span></li>
+        <li><span class="k">02</span><span><b>Drawings with pins.</b> Each drawing, with its snags numbered where they are.</span></li>
+        <li><span class="k">03</span><span><b>A card for every defect.</b> The four dates, description, remedial method, photos, a crop of the drawing, and the correspondence so far.</span></li>
+      </ul>
+    </div>
+    <div class="sheet a4" aria-label="Example A4 defects report page">
+      <div class="rp-head"><span>14 Albion Road · Defects notice: Harlow Joinery</span><svg aria-hidden="true"><use href="#badge"/></svg></div>
+      <div><span class="label" style="font-size:.8em">Schedule of defects</span><h4>4 items</h4></div>
+      <div class="tb"><div><b>Job</b><span>2417</span></div><div><b>Issued</b><span>15 Oct 2026</span></div><div><b>Prepared by</b><span>A. Shah</span></div></div>
+      <div class="rec"><span class="r">#014</span><div><h5>Door binds on head; ease and adjust hinges</h5><span class="muted">Bed 2 · Doors &amp; ironmongery · Due 28 Oct 2026</span><div class="imgs"><i></i><i></i><i></i></div></div></div>
+      <div class="rec"><span class="r">#013</span><div><h5>Silicone to worktop upstand incomplete at sink</h5><span class="muted">Kitchen · Joinery · Due 28 Oct 2026</span></div></div>
+      <div class="rec"><span class="r">#012</span><div><h5>Skirting joint open at external corner</h5><span class="muted">Bed 1 · Joinery · Due 28 Oct 2026</span></div></div>
+      <div class="foot"><span>14 Albion Road · Job 2417 · 15 Oct 2026</span><span>Page 3 of 6</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="pricing">
+  <div class="wrap">
+    <div class="band-head">
+      <p class="label">Pricing</p>
+      <h2>Priced for practices, not per seat of a big firm.</h2>
+      <p class="lede">Free while pin. is in early access. These are the plans we expect to offer afterwards.</p>
+    </div>
+    <div class="plans">
+      <div class="plan-card">
+        <div class="plan-top"><h3>Solo</h3><div class="price"><strong>£15</strong><span>per month</span></div><p class="muted">For a sole practitioner running a few jobs at once.</p></div>
+        <div class="tb"><div><b>Team</b><span>1 person</span></div><div><b>Projects</b><span>3 live</span></div></div>
+        <ul><li>iPhone, iPad and web</li><li>Unlimited snags, drawings and photos</li><li>Contractor access by link</li><li>A4 reports and CSV export</li></ul>
+        <a class="btn btn-secondary" href="#early">Request early access</a>
+      </div>
+      <div class="plan-card featured">
+        <div class="plan-top"><h3>Studio <small>Most practices</small></h3><div class="price"><strong>£45</strong><span>per month</span></div><p class="muted">For a small studio sharing projects across the team.</p></div>
+        <div class="tb"><div><b>Team</b><span>Up to 5</span></div><div><b>Projects</b><span>Unlimited</span></div></div>
+        <ul><li>Everything in Solo</li><li>Shared projects across the team</li><li>AI wording and remedial methods</li><li>Practice name on every report</li></ul>
+        <a class="btn btn-primary" href="#early">Request early access</a>
+      </div>
+      <div class="plan-card">
+        <div class="plan-top"><h3>Practice</h3><div class="price"><strong>£95</strong><span>per month</span></div><p class="muted">For a growing practice with several jobs on site.</p></div>
+        <div class="tb"><div><b>Team</b><span>Up to 15</span></div><div><b>Projects</b><span>Unlimited</span></div></div>
+        <ul><li>Everything in Studio</li><li>Admin controls for team access</li><li>Priority email support</li><li>Help moving existing snag lists in</li></ul>
+        <a class="btn btn-secondary" href="#early">Request early access</a>
+      </div>
+    </div>
+    <p class="note">Indicative prices in pounds sterling, excluding VAT, billed monthly. Contractors never pay and don't count towards your team.</p>
+  </div>
+</section>
+
+<section class="band" id="help-teaser">
+  <div class="wrap">
+    <div class="band-head">
+      <p class="label">Help centre</p>
+      <h2>Answers, written like a site note.</h2>
+      <p class="lede">Short, task-based articles for your team and for the contractors you invite.</p>
+    </div>
+    <div class="search" role="search">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M20 20l-4.2-4.2"/></svg>
+      <input id="q-home" type="search" placeholder="Search help, e.g. issue to contractor" aria-label="Search help" autocomplete="off">
+    </div>
+    <div class="results" id="r-home" aria-live="polite"></div>
+    <div class="help-grid" id="help-grid" style="margin-top:32px"></div>
+  </div>
+</section>
+
+<section class="band" id="early">
+  <div class="wrap ea">
+    <div>
+      <p class="label">Early access</p>
+      <h2 style="font-size:clamp(32px,4.4vw,52px);line-height:1;margin-top:16px">Try pin. on your next completion.</h2>
+      <p class="lede" style="margin-top:18px">We're inviting a small number of practices to use pin. on live projects, free, and to shape what comes next. Tell us a little about yours.</p>
+      <div class="tb" style="--cols:2;margin-top:28px;max-width:440px">
+        <div><b>Cost</b><span>Free during early access</span></div><div><b>Commitment</b><span>None</span></div>
+        <div><b>Setup</b><span>About 10 minutes</span></div><div><b>Devices</b><span>iPhone, iPad, web</span></div>
+      </div>
+    </div>
+    <form class="sheet form" id="ea-form" novalidate>
+      <div class="row">
+        <div class="field"><label for="ea-name">Your name</label><input id="ea-name" name="name" autocomplete="name" required></div>
+        <div class="field"><label for="ea-email">Work email</label><input id="ea-email" name="email" type="email" autocomplete="email" required></div>
+      </div>
+      <div class="row">
+        <div class="field"><label for="ea-practice">Practice</label><input id="ea-practice" name="practice" autocomplete="organization" required></div>
+        <div class="field"><label for="ea-size">Practice size</label>
+          <select id="ea-size" name="size" required><option value="">Choose…</option><option>Just me</option><option>2–5 people</option><option>6–15 people</option><option>16 or more</option></select></div>
+      </div>
+      <div class="field"><label for="ea-role">Your role</label>
+        <select id="ea-role" name="role"><option value="">Choose…</option><option>Architect</option><option>Architectural technologist</option><option>Project manager</option><option>Practice director</option><option>Other</option></select></div>
+      <div class="field"><label for="ea-note">What would you use it for? <span style="text-transform:none;letter-spacing:0">(optional)</span></label><textarea id="ea-note" name="note" placeholder="e.g. Practical completion on a 6-house scheme in November"></textarea></div>
+      <button class="btn btn-primary" type="submit" id="ea-submit">Request early access</button>
+      <div class="form-msg" id="ea-msg" hidden></div>
+      <p class="muted" style="font-size:13px">We'll use your details only to contact you about early access.</p>
+    </form>
+  </div>
+</section>
+
+</div>
+
+<!-- ================= HELP ================= -->
+<div data-view="help" class="wrap">
+  <div class="helpc">
+    <aside aria-label="Help topics" id="help-nav"></aside>
+    <div id="help-main"></div>
+  </div>
+</div>
+</main>
+
+<footer class="site-foot">
+  <div class="wrap">
+    <div class="tb">
+      <div><b>Product</b><span>pin.</span></div>
+      <div><b>For</b><span>Small architecture practices</span></div>
+      <div><b>Status</b><span>Early access</span></div>
+      <div><b>Made in</b><span>London</span></div>
+    </div>
+    <div class="bottom">
+      <span>© 2026 pin.</span>
+      <span><a href="#how" data-go="home">How it works</a> · <a href="#pricing" data-go="home">Pricing</a> · <a href="#help" data-go="help">Help</a> · <a href="#early" data-go="home">Early access</a></span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(() => {
+const SUPABASE = 'https://sbcgiryxhngmcqmapppf.supabase.co';
+const ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNiY2dpcnl4aG5nbWNxbWFwcHBmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTE5MDgxOTYsImV4cCI6MjEwNzQ4NDE5Nn0.Kp6jJf9VSoooQS7PFi9Eyg76zNBlqHxTdTA8cOWKg1w';
+
+/* ---------- Help articles ---------- */
+const CATS = [
+  ['start', 'Getting started'],
+  ['site', 'On site'],
+  ['issue', 'Issuing and tracking'],
+  ['contractors', 'For contractors'],
+  ['reports', 'Reports'],
+  ['account', 'Account and access'],
+];
+const ui = s => `<span class="ui">${s}</span>`;
+const A = [
+ { id:'set-up-your-practice', cat:'start', title:'Set up your practice', sum:'Sign in for the first time, change your temporary password and add your practice name.',
+   body:`<h2>Before you start</h2><p>Your pin. admin gives you an email address and a temporary password. If you're the admin, you received them when pin. was set up for your practice.</p>
+   <h2>Steps</h2><ol><li>Open pin. on your iPhone or in a browser and sign in with your email and temporary password.</li><li>Change the password: on the web, open ${ui('Account')} (the person icon) and use ${ui('Change Password')}; on iPhone, go to ${ui('Settings')} → ${ui('Change Password')}. Use at least 8 characters.</li><li>Add your name, so it appears on reports and in each snag's trail.</li><li>If you're the admin, type your practice's name under ${ui('Practice')}. It appears on report covers, in "Prepared by" and in messages to contractors.</li></ol>
+   <div class="callout"><b>Good to know</b>If the practice name is blank, pin. simply leaves it out. You can add it at any time.</div>`, rel:['add-your-team','create-a-project'] },
+ { id:'add-your-team', cat:'start', title:'Add colleagues to your practice', sum:'Give a colleague their own sign-in with full access to every project.',
+   body:`<p>Only an admin can add colleagues. Each colleague signs in with their own email, so the trail shows who did what.</p>
+   <h2>Steps</h2><ol><li>On the web, open ${ui('Account')} → ${ui('Add Team Member')}. On iPhone, go to ${ui('Settings')} → ${ui('Add a Team Member')}.</li><li>Enter their name and work email, then add them.</li><li>pin. shows a temporary password and copies the sign-in details. Send them to your colleague yourself, by email or message.</li><li>Ask them to change the password when they first sign in.</li></ol>
+   <div class="callout"><b>Good to know</b>pin. never sends emails on your behalf. You choose how and when to pass details on.</div>`, rel:['who-sees-what','give-contractor-access'] },
+ { id:'create-a-project', cat:'start', title:'Create a project', sum:'Set up a project with the details that appear on every report cover.',
+   body:`<h2>Steps</h2><ol><li>From ${ui('Projects')}, tap or click ${ui('+')}.</li><li>Enter the project name. Add the job number, client and site address if you have them.</li><li>Choose ${ui('Create')}. The project opens, ready for drawings.</li></ol>
+   <p>You can change these details later under the project's ${ui('Info')} tab. Changes save automatically.</p>`, rel:['upload-drawings','pin-a-snag'] },
+ { id:'upload-drawings', cat:'start', title:'Upload drawings', sum:'Add GA plans as PDF, JPG or PNG so you can pin snags on them.',
+   body:`<h2>Steps (web)</h2><ol><li>Open the project and go to ${ui('Drawings')}.</li><li>Choose the upload button at the top right, or ${ui('Upload Drawing')} under ${ui('Info')}.</li><li>Pick a PDF, JPG or PNG. Each page of a PDF becomes its own drawing, up to 20 pages per file.</li><li>Rename drawings under ${ui('Info')} → ${ui('Drawings')} so they match your drawing numbers, for example "GA-101 Rev C".</li></ol>
+   <p>Drawings sync to the iPhone app. Open the app on Wi‑Fi before you go to site so they're stored on the phone.</p>
+   <div class="callout"><b>Tip</b>Export plans from your CAD or BIM software as a PDF with a white background. Large files are reduced to keep the app fast while staying sharp when you zoom in.</div>`, rel:['pin-a-snag','work-offline'] },
+ { id:'pin-a-snag', cat:'site', title:'Pin a snag on a drawing', sum:'Record a defect at the exact spot where it is.',
+   body:`<h2>Steps</h2><ol><li>Open the project and go to ${ui('Drawings')}. Pick the drawing if there's more than one.</li><li>Tap the ${ui('+')} button, then tap the spot on the drawing. Pinch or scroll to zoom first if you need to be precise.</li><li>Describe what's wrong in the first line. Write the defect and where it is: "Door binds on head, bed 2".</li><li>Add photos, the location, trade, responsible party, due date and priority.</li><li>Choose ${ui('Add')}. The snag gets the next number and appears as a pin.</li></ol>
+   <p>Not every snag needs a drawing. From the ${ui('Defects')} list, ${ui('+')} adds a snag without a pin.</p>
+   <div class="callout"><b>Good to know</b>Closed snags are hidden on drawings. Turn on ${ui('Closed')} to see them.</div>`, rel:['photos-and-markup','voice-notes'] },
+ { id:'photos-and-markup', cat:'site', title:'Add photos and mark them up', sum:'Photograph a defect and draw on the photo to show exactly what you mean.',
+   body:`<h2>Steps</h2><ol><li>In a snag, tap ${ui('Photo')} to take a picture or choose one from your library.</li><li>Tap a photo to open it, then choose ${ui('Annotate')}.</li><li>Pick a tool and a colour. On the web you have pen, arrow, box and text; on iPhone and iPad you get Apple's drawing tools, including Apple Pencil.</li><li>Draw on the photo. Use ${ui('Undo')} to step back.</li><li>Choose ${ui('Done')} to save. The marked-up photo replaces the original and the change is noted in the trail.</li></ol>
+   <div class="callout"><b>Tip</b>Use an arrow and a short text label, such as "Crack 300mm", rather than circling the whole wall.</div>`, rel:['pin-a-snag','print-a4-report'] },
+ { id:'voice-notes', cat:'site', title:'Dictate descriptions and notes', sum:'Speak instead of typing; pin. turns your words into text.',
+   body:`<h2>Steps</h2><ol><li>In a snag, tap ${ui('Dictate')} beside the description, or the microphone in the trail.</li><li>Allow microphone and speech recognition the first time you're asked.</li><li>Speak normally. The text appears as you talk.</li><li>Tap the microphone again to stop. Edit the text if anything was misheard.</li></ol>
+   <p>On iPhone, speech is converted on the device where supported, so dictation works without signal. In a browser, dictation needs Chrome, Edge or Safari and an internet connection.</p>`, rel:['ai-assist','work-offline'] },
+ { id:'ai-assist', cat:'site', title:'Refine wording and suggest a remedy with AI', sum:'Turn rough notes into a clear defect description and draft a remedial method.',
+   body:`<h2>Steps</h2><ol><li>Write or dictate what you see, however rough.</li><li>Choose ${ui('Refine with AI')}. pin. rewrites the title and description in plain site-report English.</li><li>Choose ${ui('Suggest Method with AI')} to draft how the contractor should put it right.</li><li>Read both and edit anything that isn't right before you issue the snag.</li></ol>
+   <div class="callout"><b>Good to know</b>The AI works only from what you've written. It won't add measurements or causes you didn't give it. If you see "AI isn't switched on yet", ask your admin to turn it on for your practice.</div>`, rel:['voice-notes','issue-to-a-contractor'] },
+ { id:'work-offline', cat:'site', title:'Work offline on site', sum:'Use the iPhone app in basements and new builds with no signal.',
+   body:`<p>The iPhone app saves everything on the phone first and syncs in the background when it can.</p>
+   <h2>Before you go</h2><ol><li>Open pin. on Wi‑Fi so drawings and photos download.</li><li>Check ${ui('Settings')} → ${ui('Sync')} shows a recent "Last synced" time.</li></ol>
+   <h2>On site</h2><p>Pin snags, take photos and dictate as normal. The sync icon shows changes waiting to upload.</p>
+   <h2>Back online</h2><p>pin. uploads your changes automatically. To check straight away, use ${ui('Settings')} → ${ui('Sync Now')}.</p>
+   <div class="callout"><b>Good to know</b>The web app needs a connection. Use the iPhone or iPad app for site work.</div>`, rel:['pin-a-snag','voice-notes'] },
+ { id:'snag-lifecycle', cat:'issue', title:'How a snag moves from open to closed', sum:'The four statuses, the dates pin. records and what goes in the trail.',
+   body:`<h2>The four statuses</h2><ul><li><b>Open</b>: recorded, not yet sent to anyone. pin. records the date it was opened.</li><li><b>Notified</b>: issued to the responsible party. The first notice date is kept.</li><li><b>Fixed</b>: the contractor says the work is done, awaiting your inspection.</li><li><b>Closed</b>: you've inspected and accepted it.</li></ul>
+   <p>A closed snag can be reopened. The trail notes the reopening and the snag goes back to the status you choose.</p>
+   <h2>The trail</h2><p>Every snag keeps one trail, newest first. Each entry shows who, when and what kind:</p><ul><li><b>Update</b>: a status change or an edited field.</li><li><b>Note</b>: a note from your team.</li><li><b>Issued</b>: the snag was sent in a notice or report.</li><li><b>Reply</b>: a message from the contractor, or one you've recorded for them.</li></ul>`, rel:['issue-to-a-contractor','inspect-and-close'] },
+ { id:'issue-to-a-contractor', cat:'issue', title:'Issue snags to a contractor', sum:'Send a party all their outstanding snags in one A4 notice.',
+   body:`<h2>Steps (web)</h2><ol><li>Open the project and go to ${ui('Reports')}.</li><li>Under ${ui('Issue to responsible parties')}, choose the party.</li><li>Confirm. pin. marks their open snags as notified and records the notice in each trail.</li><li>The A4 notice opens. Print it or save it as a PDF from the print dialog.</li><li>A covering message with their link is copied. Paste it into an email, attach the PDF and send it.</li></ol>
+   <h2>Steps (iPhone)</h2><p>In ${ui('Reports')}, choose ${ui('Issue to')} and the party. pin. builds the PDF and opens the share sheet with the covering message.</p>
+   <h2>One snag at a time</h2><p>In a snag, choose ${ui('Notify')} and the party's name. pin. records the notice and copies a message about that one item.</p>
+   <div class="callout"><b>Good to know</b>pin. doesn't send email itself, so notices always come from you.</div>`, rel:['give-contractor-access','snag-lifecycle'] },
+ { id:'give-contractor-access', cat:'issue', title:'Give a contractor access', sum:'Let a responsible party see and respond to the snags issued to them.',
+   body:`<h2>Steps</h2><ol><li>Open the project's ${ui('Info')} tab.</li><li>Add the party under ${ui('Add party')} with their company name, trade and email. Or edit an existing party to add an email.</li><li>Choose ${ui('Portal access')} beside the party.</li><li>pin. shows a temporary password and copies the sign-in details with the link. Send them to the contractor yourself.</li></ol>
+   <p>Choosing ${ui('Portal access')} again resets their password, which is useful if they lose it.</p>
+   <div class="callout"><b>What they see</b>Only the snags issued to them: notified, fixed and closed, with each snag's trail. They never see open snags or other parties' snags. Notes you add to one of their snags are visible to them, so keep internal comments elsewhere.</div>`, rel:['for-contractors','who-sees-what'] },
+ { id:'inspect-and-close', cat:'issue', title:'Inspect and close a snag', sum:'Accept a contractor’s fix, or send it back with a note.',
+   body:`<h2>Steps</h2><ol><li>In ${ui('Defects')}, choose ${ui('Fixed')} to see everything awaiting inspection.</li><li>Open a snag and read the contractor's reply and photos in the trail.</li><li>Inspect on site if you need to.</li><li>If it's right, set the status to ${ui('Closed')}. pin. records the closed date.</li><li>If it isn't, set it back to ${ui('Notified')} and add a note saying what's still wrong.</li></ol>`, rel:['snag-lifecycle','print-a4-report'] },
+ { id:'correspondence', cat:'issue', title:'Record notes and correspondence', sum:'Keep phone calls, site conversations and emails with the snag they\u2019re about.',
+   body:`<h2>Steps</h2><ol><li>Open the snag and scroll to ${ui('Correspondence trail')}.</li><li>Type or dictate the note.</li><li>On the web, choose ${ui('Note')} for your own note or ${ui('From party')} to record something the contractor told you.</li><li>Add it with the arrow button.</li></ol>
+   <p>Each entry is time-stamped with your name, and appears in reports when you include the correspondence trail.</p>`, rel:['snag-lifecycle','print-a4-report'] },
+ { id:'for-contractors', cat:'contractors', title:'Responding to snags as a contractor', sum:'For contractors: view what’s been issued to you, reply and mark items fixed.',
+   body:`<p>An architect using pin. has issued you some snags. You don't need to install anything.</p>
+   <h2>Steps</h2><ol><li>Open the link you were sent and sign in with the email and temporary password.</li><li>Choose the project. ${ui('Your Defects')} lists everything issued to you.</li><li>Open a snag to see the description, photos, location on the drawing and the remedial method.</li><li>To ask a question, write in ${ui('Reply')} and send it.</li><li>When the work is done, choose ${ui('Mark as Fixed…')}, describe what you did, add photos of the finished work and ${ui('Submit')}.</li></ol>
+   <p>The architect then inspects it and closes it, or sends it back with a note.</p>
+   <div class="callout"><b>Tip</b>Change your password from the account icon. You can also print your list from ${ui('Print')}.</div>`, rel:['who-sees-what'] },
+ { id:'print-a4-report', cat:'reports', title:'Print an A4 defects report', sum:'Produce a report of any set of snags, laid out for print or PDF.',
+   body:`<h2>Steps (web)</h2><ol><li>Open the project and go to ${ui('Reports')}.</li><li>Choose which statuses to include. pin. names the report to match, for example "Outstanding defects".</li><li>Filter by responsible party or trade if you need to.</li><li>Choose whether to include photos, drawings and the correspondence trail.</li><li>Choose ${ui('Preview & Print A4')}, check it, then ${ui('Print')}. To make a PDF, choose "Save as PDF" in the print dialog.</li></ol>
+   <h2>Steps (iPhone)</h2><p>In ${ui('Reports')}, set the same options and choose ${ui('Create A4 Report')}. Share the PDF by email, AirDrop or Files.</p>`, rel:['issue-to-a-contractor','export-csv'] },
+ { id:'export-csv', cat:'reports', title:'Export snags to a spreadsheet', sum:'Download a CSV of snags with every date, for Excel or Numbers.',
+   body:`<h2>Steps</h2><ol><li>In ${ui('Reports')}, set the statuses and filters you want.</li><li>Choose ${ui('Export CSV')}.</li><li>Open the file in Excel or Numbers.</li></ol><p>Each row has the reference, title, status, priority, trade, responsible party, location, drawing, due date, whether it's overdue, the opened, notified, fixed and closed dates, the description and the remedial method.</p>`, rel:['print-a4-report'] },
+ { id:'who-sees-what', cat:'account', title:'Who can see what', sum:'The three kinds of access in pin.: admin, team and contractor.',
+   body:`<ul><li><b>Admin</b>: everything a team member can do, plus adding colleagues and setting the practice name.</li><li><b>Team</b>: every project in your practice. Create projects, upload drawings, record and issue snags, run reports and give contractors access.</li><li><b>Contractor</b>: only the snags issued to them, once notified. They can reply, add photos and mark items fixed, in a browser.</li></ul>
+   <p>Your practice's data is stored in its own database and photo store, and only signed-in people with access can see it.</p>`, rel:['add-your-team','give-contractor-access'] },
+ { id:'change-password', cat:'account', title:'Change or reset a password', sum:'Change your own password, or get a contractor back in.',
+   body:`<h2>Change your own</h2><ol><li>On the web, open ${ui('Account')}; on iPhone, go to ${ui('Settings')} → ${ui('Change Password')}.</li><li>Enter a new password of at least 8 characters, twice, and save.</li></ol>
+   <h2>Reset someone else's</h2><p>For a contractor, any team member can choose ${ui('Portal access')} beside the party again to issue a new temporary password. For a colleague, ask your admin.</p>`, rel:['who-sees-what'] },
+];
+const byId = Object.fromEntries(A.map(a => [a.id, a]));
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const strip = s => s.replace(/<[^>]+>/g, ' ');
+
+function search(q){
+  q = q.trim().toLowerCase(); if (q.length < 2) return [];
+  const words = q.split(/\s+/);
+  return A.map(a => { const hay = (a.title + ' ' + a.sum + ' ' + strip(a.body)).toLowerCase();
+      let s = 0; for (const w of words){ if (!hay.includes(w)) return null; if (a.title.toLowerCase().includes(w)) s += 3; if (a.sum.toLowerCase().includes(w)) s += 1; }
+      return [s, a]; }).filter(Boolean).sort((x, y) => y[0] - x[0]).slice(0, 6).map(x => x[1]);
+}
+function bindSearch(input, out){
+  input.addEventListener('input', () => {
+    const r = search(input.value);
+    out.innerHTML = input.value.trim().length < 2 ? '' : r.length
+      ? r.map(a => `<a href="#${a.id}"><b>${esc(a.title)}</b><small>${esc(a.sum)}</small></a>`).join('')
+      : `<p class="muted" style="padding:10px 4px">No articles match. Try "drawing", "contractor" or "report".</p>`;
+  });
+}
+
+// home teaser grid
+document.getElementById('help-grid').innerHTML = CATS.map(([k, name]) =>
+  `<div class="help-cat"><h3>${name}</h3><ul>${A.filter(a => a.cat === k).map(a => `<li><a href="#${a.id}">${esc(a.title)}</a></li>`).join('')}</ul></div>`).join('');
+bindSearch(document.getElementById('q-home'), document.getElementById('r-home'));
+
+function helpNav(current){
+  return `<div class="search" role="search" style="min-height:44px"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M20 20l-4.2-4.2"/></svg><input id="q-help" type="search" placeholder="Search help" aria-label="Search help" autocomplete="off" style="height:42px"></div><div class="results" id="r-help"></div>`
+   + CATS.map(([k, name]) => `<div><h4 class="label">${name}</h4><ul>${A.filter(a => a.cat === k).map(a => `<li><a href="#${a.id}" ${a.id === current ? 'aria-current="page"' : ''}>${esc(a.title)}</a></li>`).join('')}</ul></div>`).join('');
+}
+function renderHelp(id){
+  const nav = document.getElementById('help-nav'), main = document.getElementById('help-main');
+  nav.innerHTML = helpNav(id); bindSearch(document.getElementById('q-help'), document.getElementById('r-help'));
+  const a = byId[id];
+  if (!a){
+    main.innerHTML = `<p class="label">Help centre</p><h1 style="font-size:clamp(36px,5vw,56px);line-height:1;margin:14px 0 14px">How can we help?</h1><p class="lede" style="margin-bottom:36px">Step-by-step guides for practices using pin., and for the contractors they invite.</p>
+      <div class="cat-list">${CATS.map(([k, name]) => `<section><h2>${name}</h2><ul>${A.filter(x => x.cat === k).map(x => `<li><a href="#${x.id}"><div><b>${esc(x.title)}</b><span>${esc(x.sum)}</span></div><i>→</i></a></li>`).join('')}</ul></section>`).join('')}</div>`;
+    document.title = 'Help · pin.'; return;
+  }
+  const cat = CATS.find(c => c[0] === a.cat)[1];
+  main.innerHTML = `<nav class="crumbs" aria-label="Breadcrumb"><a href="#help">Help centre</a><span aria-hidden="true">/</span><span>${cat}</span></nav>
+   <article class="article"><h1>${esc(a.title)}</h1><div class="meta"><span class="label">${cat}</span><span class="label">Updated 15 Oct 2026</span><span class="label">${Math.max(1, Math.round(strip(a.body).split(/\s+/).length / 200))} min read</span></div>
+   <p class="summary">${esc(a.sum)}</p>${a.body}
+   ${(a.rel || []).length ? `<div class="related"><span class="label">Related</span>${a.rel.map(r => byId[r] ? `<a href="#${r}">${esc(byId[r].title)}</a>` : '').join('')}</div>` : ''}</article>
+   <p class="muted" style="margin-top:22px;font-size:14px">Still stuck? Request early access with a note and we'll get back to you.</p>`;
+  document.title = a.title + ' · pin.';
+}
+
+/* ---------- Views ---------- */
+function route(){
+  const h = location.hash.slice(1);
+  const isHelp = h === 'help' || !!byId[h];
+  document.querySelectorAll('[data-view]').forEach(v => v.classList.toggle('on', v.dataset.view === (isHelp ? 'help' : 'home')));
+  document.querySelectorAll('.nav a').forEach(a => a.toggleAttribute('aria-current', isHelp && a.getAttribute('href') === '#help'));
+  if (isHelp){ renderHelp(h); window.scrollTo(0, 0); }
+  else { document.title = 'pin.'; if (h){ const el = document.getElementById(h); if (el) el.scrollIntoView(); } }
+}
+window.addEventListener('hashchange', route);
+document.addEventListener('click', e => {
+  const a = e.target.closest('a[href^="#"]'); if (!a) return;
+  const h = a.getAttribute('href').slice(1);
+  if (('#' + h) === location.hash){ e.preventDefault(); route(); }
+});
+route();
+
+/* ---------- Early access ---------- */
+const form = document.getElementById('ea-form'), msg = document.getElementById('ea-msg'), btn = document.getElementById('ea-submit');
+function say(text, kind){ msg.hidden = false; msg.className = 'form-msg ' + kind; msg.textContent = text; }
+form.addEventListener('submit', async e => {
+  e.preventDefault();
+  const f = Object.fromEntries(new FormData(form).entries());
+  if (!f.name.trim() || !f.practice.trim() || !f.size) return say('Add your name, practice and practice size.', 'err');
+  if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(f.email.trim())) return say("That email address doesn't look right. Check it and try again.", 'err');
+  btn.disabled = true; btn.textContent = 'Sending…';
+  try {
+    const r = await fetch(SUPABASE + '/rest/v1/early_access', { method:'POST',
+      headers:{ apikey:ANON, Authorization:'Bearer ' + ANON, 'Content-Type':'application/json', Prefer:'return=minimal' },
+      body: JSON.stringify({ name:f.name.trim(), email:f.email.trim().toLowerCase(), practice:f.practice.trim(), team_size:f.size, role:f.role || null, note:(f.note || '').trim() || null, source:location.host || 'preview' }) });
+    if (!r.ok) throw new Error('status ' + r.status);
+    form.reset(); say("Thanks. You're on the list, and we'll be in touch about early access.", 'ok');
+  } catch (err) {
+    say("We couldn't send that just now. Check your connection and try again.", 'err');
+  } finally { btn.disabled = false; btn.textContent = 'Request early access'; }
+});
+})();
+</script>
+
+</body>
+</html>
