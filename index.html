@@ -98,6 +98,13 @@ p{margin:0}
 .plan .room{font:500 9px var(--mono);letter-spacing:.08em;fill:var(--graphite);text-transform:uppercase}
 .plan .room.rn{font-size:7px;letter-spacing:.04em;fill:var(--signal)}
 b.pn{font-weight:800;letter-spacing:-.01em}
+.pair{padding:clamp(28px,5vw,64px) 0 0}
+.pair-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(10px,2vw,24px)}
+.pair figure{margin:0;position:relative;aspect-ratio:9/11;overflow:hidden;border-radius:2px;border:1px solid var(--rule);background:var(--trace)}
+.pair figcaption{position:absolute;left:12px;bottom:12px;background:var(--sheet);color:var(--ink);padding:7px 10px;border-radius:2px}
+.pair-note{margin-top:14px;color:var(--graphite);font-size:15px}
+@media (max-width:560px){.pair figure{aspect-ratio:3/4}.pair figcaption{left:8px;bottom:8px;padding:5px 7px;font-size:10px}}
+b.pn .pd{color:var(--signal)}
 .rec .r small{display:block;font-size:.72em;opacity:.7;margin-top:2px;letter-spacing:0}
 .pinm{position:absolute;width:28px;height:28px;margin:-28px 0 0 0;border-radius:50% 50% 50% 0;transform:rotate(-45deg);background:var(--signal);box-shadow:0 0 0 2px var(--sheet);display:grid;place-items:center;animation:drop .5s cubic-bezier(.2,.8,.2,1.2) both}
 .pinm span{transform:rotate(45deg);font:600 10px/1 var(--mono);color:var(--on-signal)}
@@ -294,7 +301,7 @@ b.pn{font-weight:800;letter-spacing:-.01em}
 .photo-band .quote{background:var(--sheet);color:var(--ink);max-width:520px;padding:18px 20px;border-radius:2px;box-shadow:var(--shadow-sheet)}
 .photo-band .quote p{font:700 clamp(18px,2.2vw,24px)/1.2 var(--display);font-stretch:112%;letter-spacing:-.015em}
 .photo-band .quote .label{display:block;margin-top:10px}
-.case-photo{margin:calc(-1 * clamp(22px,3vw,32px)) calc(-1 * clamp(22px,3vw,32px)) 4px;aspect-ratio:16/9;overflow:hidden;border-radius:11px 11px 0 0;max-width:none}
+.case-photo{margin:calc(-1 * clamp(22px,3vw,32px)) calc(-1 * clamp(22px,3vw,32px)) 4px;aspect-ratio:10/7;overflow:hidden;border-radius:11px 11px 0 0;max-width:none}
 .markup{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:clamp(24px,4vw,56px);align-items:center;margin-bottom:clamp(40px,6vw,64px)}
 .markup figure{position:relative;margin:0;aspect-ratio:4/3;overflow:hidden;border-radius:2px;box-shadow:var(--shadow-sheet);border:1px solid var(--rule)}
 .markup figure svg{position:absolute;inset:0;width:100%;height:100%}
@@ -391,10 +398,13 @@ b.pn{font-weight:800;letter-spacing:-.01em}
   </div>
 </section>
 
-<figure class="photo-band" aria-label="An architect reviewing drawings on site">
-  <div class="frame"><img class="bw" src="https://images.unsplash.com/photo-1772442198624-4fc4d7281e89?w=1600&h=800&fit=crop&crop=entropy&sat=-100&q=70&auto=format" srcset="https://images.unsplash.com/photo-1772442198624-4fc4d7281e89?w=1600&h=800&fit=crop&crop=entropy&sat=-100&q=70&auto=format 1x, https://images.unsplash.com/photo-1772442198624-4fc4d7281e89?w=3200&h=1600&fit=crop&crop=entropy&sat=-100&q=70&auto=format 2x" width="1600" height="800" alt="An architect reviewing drawings on site" loading="lazy" decoding="async"></div>
-  <figcaption><div class="wrap"><div class="quote"><p>Walk the building. Leave with the list issued.</p><span class="label">Practical completion · on site</span></div></div></figcaption>
-</figure>
+<section class="pair" aria-label="Modern and Victorian buildings">
+  <div class="wrap pair-grid">
+    <figure><img class="bw" src="https://images.unsplash.com/photo-1657346088167-b982455bf29a?w=900&h=1100&fit=crop&crop=entropy&sat=-100&q=70&auto=format" srcset="https://images.unsplash.com/photo-1657346088167-b982455bf29a?w=900&h=1100&fit=crop&crop=entropy&sat=-100&q=70&auto=format 1x, https://images.unsplash.com/photo-1657346088167-b982455bf29a?w=1800&h=2200&fit=crop&crop=entropy&sat=-100&q=70&auto=format 2x" width="900" height="1100" alt="A contemporary house with large glazed walls" loading="lazy" decoding="async"><figcaption class="label">New build</figcaption></figure>
+    <figure><img class="bw" src="https://images.unsplash.com/photo-1758799012348-2aa1a5030ab9?w=900&h=1100&fit=crop&crop=entropy&sat=-100&q=70&auto=format" srcset="https://images.unsplash.com/photo-1758799012348-2aa1a5030ab9?w=900&h=1100&fit=crop&crop=entropy&sat=-100&q=70&auto=format 1x, https://images.unsplash.com/photo-1758799012348-2aa1a5030ab9?w=1800&h=2200&fit=crop&crop=entropy&sat=-100&q=70&auto=format 2x" width="900" height="1100" alt="A street of white Victorian terraced houses" loading="lazy" decoding="async"><figcaption class="label">Victorian terrace</figcaption></figure>
+  </div>
+  <p class="wrap pair-note">New build or period house. Every snag pinned.</p>
+</section>
 
 <section class="band" id="how">
   <div class="wrap">
@@ -438,21 +448,10 @@ b.pn{font-weight:800;letter-spacing:-.01em}
       <p class="label">What's in it</p>
       <h2>Made for the walk-round, not the office.</h2>
     </div>
-    <div class="markup">
-      <figure><img class="bw" src="https://images.unsplash.com/photo-1694415847950-973e7dcca94d?w=1000&h=750&fit=crop&crop=entropy&sat=-100&q=70&auto=format" srcset="https://images.unsplash.com/photo-1694415847950-973e7dcca94d?w=1000&h=750&fit=crop&crop=entropy&sat=-100&q=70&auto=format 1x, https://images.unsplash.com/photo-1694415847950-973e7dcca94d?w=2000&h=1500&fit=crop&crop=entropy&sat=-100&q=70&auto=format 2x" width="1000" height="750" alt="A crack in a plastered wall, marked up with an arrow and a label" loading="lazy" decoding="async">
-        <svg viewBox="0 0 1000 750" aria-hidden="true"><path class="mk" d="M760 170 C 700 230 640 270 560 300"/><path class="mk-fill" d="M548 306 l40 -34 l4 30 z"/><rect class="mk" x="380" y="230" width="230" height="300" rx="6" style="stroke-dasharray:0"/><text class="mk-text" x="640" y="150">Crack 300mm</text></svg>
-      </figure>
-      <div>
-        <span class="label">Photos</span>
-        <h3 style="margin-top:12px">Mark up what you see.</h3>
-        <p>Take the photo. Draw on it: arrow, box, label. It goes into the snag and the report. Nobody argues about which crack.</p>
-        <div class="tools"><span>Pen</span><span>Arrow</span><span>Box</span><span>Text</span><span>Apple Pencil</span></div>
-      </div>
-    </div>
     <div class="features">
       <div class="feature"><span class="label">Drawings</span><h3>Pins on your own plans</h3><p>Upload GA plans as PDF or image. Zoom in, drop a pin. Every snag knows where it is.</p></div>
       <div class="feature"><span class="label">Rooms</span><h3>A reference for every room</h3><p>Each snag carries its room number from your drawings. #014 · RM03.07. Search it, sort it, report it.</p></div>
-      <div class="feature"><span class="label">Voice</span><h3>Speak, don't type</h3><p>Dictate with gloves on. It works without signal.</p></div>
+      <div class="feature"><span class="label">Photos &amp; voice</span><h3>Mark it up. Say it.</h3><p>Draw on photos: arrow, box, label. Dictate with gloves on. Works without signal.</p></div>
       <div class="feature"><span class="label">AI assist</span><h3>Wording and a remedy</h3><p>"Door sticks" becomes a proper defect description. AI drafts the remedy. You approve it.</p></div>
       <div class="feature"><span class="label">Trail</span><h3>One record per snag</h3><p>Every status, note, notice and reply. Time-stamped. The audit trail writes itself.</p></div>
       <div class="feature"><span class="label">Team</span><h3>Your practice, your access</h3><p>Your team sees everything. Contractors see only their snags.</p></div>
@@ -469,28 +468,28 @@ b.pn{font-weight:800;letter-spacing:-.01em}
     </div>
     <div class="cases">
       <article class="case">
-        <div class="case-photo"><img class="bw" src="https://images.unsplash.com/photo-1768321916877-8cf4e4ef7487?w=800&h=450&fit=crop&crop=entropy&sat=-100&q=70&auto=format" srcset="https://images.unsplash.com/photo-1768321916877-8cf4e4ef7487?w=800&h=450&fit=crop&crop=entropy&sat=-100&q=70&auto=format 1x, https://images.unsplash.com/photo-1768321916877-8cf4e4ef7487?w=1600&h=900&fit=crop&crop=entropy&sat=-100&q=70&auto=format 2x" width="800" height="450" alt="Hallway at second fix, before completion" loading="lazy" decoding="async"></div>
+        <div class="case-photo"><img class="bw" src="https://images.unsplash.com/photo-1766603636700-e9d80473f40f?w=800&h=560&fit=crop&crop=entropy&sat=-100&q=70&auto=format" srcset="https://images.unsplash.com/photo-1766603636700-e9d80473f40f?w=800&h=560&fit=crop&crop=entropy&sat=-100&q=70&auto=format 1x, https://images.unsplash.com/photo-1766603636700-e9d80473f40f?w=1600&h=1120&fit=crop&crop=entropy&sat=-100&q=70&auto=format 2x" width="800" height="560" alt="A new house with large glazed walls, at completion" loading="lazy" decoding="async"></div>
         <span class="label"><span>Practical completion</span><span class="ref">Stage 6</span></span>
         <h3>The pre-completion inspection</h3>
         <p>Room by room, drawings in hand. Leave with a list nobody can misread.</p>
         <ul><li>Pin each defect on the GA plan as you go</li><li>Issue the whole list the same afternoon</li><li>Track what's outstanding before you certify</li></ul>
       </article>
       <article class="case">
-        <div class="case-photo"><img class="bw" src="https://images.unsplash.com/photo-1773536291669-37163d1279e3?w=800&h=450&fit=crop&crop=entropy&sat=-100&q=70&auto=format" srcset="https://images.unsplash.com/photo-1773536291669-37163d1279e3?w=800&h=450&fit=crop&crop=entropy&sat=-100&q=70&auto=format 1x, https://images.unsplash.com/photo-1773536291669-37163d1279e3?w=1600&h=900&fit=crop&crop=entropy&sat=-100&q=70&auto=format 2x" width="800" height="450" alt="A street of terraced houses" loading="lazy" decoding="async"></div>
+        <div class="case-photo"><img class="bw" src="https://images.unsplash.com/photo-1780554193584-2e4da0bd7b36?w=800&h=560&fit=crop&crop=entropy&sat=-100&q=70&auto=format" srcset="https://images.unsplash.com/photo-1780554193584-2e4da0bd7b36?w=800&h=560&fit=crop&crop=entropy&sat=-100&q=70&auto=format 1x, https://images.unsplash.com/photo-1780554193584-2e4da0bd7b36?w=1600&h=1120&fit=crop&crop=entropy&sat=-100&q=70&auto=format 2x" width="800" height="560" alt="A street of Victorian brick terraced houses" loading="lazy" decoding="async"></div>
         <span class="label"><span>Rectification period</span><span class="ref">12 months</span></span>
         <h3>The end-of-defects inspection</h3>
         <p>Reopen the project a year on. Log what's new. Keep the full history.</p>
         <ul><li>Add new snags alongside last year's closed ones</li><li>Show closed items on the drawing for comparison</li><li>Print the schedule for the making good certificate</li></ul>
       </article>
       <article class="case">
-        <div class="case-photo"><img class="bw" src="https://images.unsplash.com/photo-1757742690834-aa581b9f53b2?w=800&h=450&fit=crop&crop=entropy&sat=-100&q=70&auto=format" srcset="https://images.unsplash.com/photo-1757742690834-aa581b9f53b2?w=800&h=450&fit=crop&crop=entropy&sat=-100&q=70&auto=format 1x, https://images.unsplash.com/photo-1757742690834-aa581b9f53b2?w=1600&h=900&fit=crop&crop=entropy&sat=-100&q=70&auto=format 2x" width="800" height="450" alt="A finished, empty room with a large window" loading="lazy" decoding="async"></div>
+        <div class="case-photo"><img class="bw" src="https://images.unsplash.com/photo-1696237461860-630be53f179c?w=800&h=560&fit=crop&crop=entropy&sat=-100&q=70&auto=format" srcset="https://images.unsplash.com/photo-1696237461860-630be53f179c?w=800&h=560&fit=crop&crop=entropy&sat=-100&q=70&auto=format 1x, https://images.unsplash.com/photo-1696237461860-630be53f179c?w=1600&h=1120&fit=crop&crop=entropy&sat=-100&q=70&auto=format 2x" width="800" height="560" alt="A contemporary brick house with a lawn" loading="lazy" decoding="async"></div>
         <span class="label"><span>Client handover</span><span class="ref">Walk-round</span></span>
         <h3>Walking the client round</h3>
         <p>Capture the client's words as you walk. Tidy them up back at the office.</p>
         <ul><li>Dictate notes as the client talks</li><li>Refine the wording with AI later</li><li>Share a clean report the client can follow</li></ul>
       </article>
       <article class="case">
-        <div class="case-photo"><img class="bw" src="https://images.unsplash.com/photo-1618832515490-e181c4794a45?w=800&h=450&fit=crop&crop=entropy&sat=-100&q=70&auto=format" srcset="https://images.unsplash.com/photo-1618832515490-e181c4794a45?w=800&h=450&fit=crop&crop=entropy&sat=-100&q=70&auto=format 1x, https://images.unsplash.com/photo-1618832515490-e181c4794a45?w=1600&h=900&fit=crop&crop=entropy&sat=-100&q=70&auto=format 2x" width="800" height="450" alt="A kitchen being refitted" loading="lazy" decoding="async"></div>
+        <div class="case-photo"><img class="bw" src="https://images.unsplash.com/photo-1778448063789-4106abda4f45?w=800&h=560&fit=crop&crop=entropy&sat=-100&q=70&auto=format" srcset="https://images.unsplash.com/photo-1778448063789-4106abda4f45?w=800&h=560&fit=crop&crop=entropy&sat=-100&q=70&auto=format 1x, https://images.unsplash.com/photo-1778448063789-4106abda4f45?w=1600&h=1120&fit=crop&crop=entropy&sat=-100&q=70&auto=format 2x" width="800" height="560" alt="Victorian red brick terraces with iron balconies" loading="lazy" decoding="async"></div>
         <span class="label"><span>Small works</span><span class="ref">Refurb · fit-out</span></span>
         <h3>Small works and fit-outs</h3>
         <p>One contractor, short programme. pin. replaces the spreadsheet, the photo folder and the email chain.</p>
@@ -762,7 +761,7 @@ function renderHelp(id){
 
 
 /* ---------- pin. in bold ---------- */
-const SKIP = new Set(['SCRIPT','STYLE','TITLE','TEXTAREA','INPUT','OPTION','SELECT','svg','B','STRONG','H1','H2','H3']);
+const SKIP = new Set(['SCRIPT','STYLE','TITLE','TEXTAREA','INPUT','OPTION','SELECT','svg']);
 function boldPin(root){
   const w = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, { acceptNode(n){
     for (let p = n.parentNode; p && p !== root.parentNode; p = p.parentNode) if (SKIP.has(p.nodeName) || (p.classList && p.classList.contains('pn'))) return NodeFilter.FILTER_REJECT;
@@ -773,7 +772,7 @@ function boldPin(root){
     while ((m = re.exec(t))){
       const at = m.index + m[1].length;
       if (/\b(a|the|each|one|its|every)\s+$/i.test(t.slice(0, at))) continue;
-      frag.append(t.slice(last, at)); const b = document.createElement('b'); b.className = 'pn'; b.textContent = 'pin.'; frag.append(b); last = at + 4;
+      frag.append(t.slice(last, at)); const b = document.createElement('b'); b.className = 'pn'; b.append('pin'); const d = document.createElement('span'); d.className = 'pd'; d.textContent = '.'; b.append(d); frag.append(b); last = at + 4;
     }
     if (last){ frag.append(t.slice(last)); n.replaceWith(frag); }
   });
